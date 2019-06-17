@@ -13,10 +13,19 @@ import java.util.List;
 @Builder
 public class PersonalTaskForm {
     List<PersonalTask> personalTasks;
+    private Integer id;
     private Integer studentId;
     private Integer taskId;
     private Integer teacherId;
     private String status;
+
+    public PersonalTaskForm(Integer id, Integer studentId, Integer taskId, Integer teacherId, String status) {
+        this.id = id;
+        this.studentId = studentId;
+        this.taskId = taskId;
+        this.teacherId = teacherId;
+        this.status = status;
+    }
 
     public PersonalTaskForm(List<PersonalTask> personalTasks) {
         this.personalTasks = personalTasks;

@@ -46,6 +46,8 @@ public class StudentService {
         return personalTaskDao.findPersonalTaskByStudent(student);
     }
 
+
+
     public Optional<Student> getStudentById(int id){
         Optional<Student> studentOptional = studentsDao.findStudentById(id);
         Optional<Group> groupOptional;
@@ -77,6 +79,10 @@ public class StudentService {
             return true;
         }
         return false;
+    }
+
+    public List<Student> getStudentsByNameOrSurnameOrGroupId(String name, String surname, Integer groupId){
+        return studentsDao.findStudentByNameOrSurnameOrGroupId(name, surname, groupId);
     }
 
 }

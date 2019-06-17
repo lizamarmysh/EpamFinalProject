@@ -36,4 +36,11 @@ public class Task {
                 .text(taskForm.getTaskText())
                 .build();
     }
+
+    public static Task fromNameOrSubject(TaskForm taskForm){
+        return Task.builder()
+                .name(taskForm.getTaskName())
+                .subjectId(taskForm.getSubjectId())
+                .build();
+    }
 }

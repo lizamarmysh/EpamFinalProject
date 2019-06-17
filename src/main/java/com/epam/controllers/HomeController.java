@@ -36,50 +36,10 @@ public class HomeController {
     private GroupService groupService;
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public String getForm(@RequestParam("role") String role, StudentForm studentForm, TeacherForm teacherForm, ModelMap modelMap, HttpSession httpSession) {
+    public String getForm(@RequestParam("role") String role, StudentForm studentForm, TeacherForm teacherForm, ModelMap modelMap, HttpSession session) {
         if (role.equalsIgnoreCase("teacher")) {
-//            Teacher teacher = Teacher.from(teacherForm);
             Teacher teacher = teacherService.checkAuthorization(Teacher.from(teacherForm));
             if (teacher != null) {
-//                List<Task> tasks = new ArrayList<>();
-//                for (Task task : teacherService.getAllTasks()) {
-//                    Optional<Task> taskOptional = taskService.getTaskById(task.getId());
-//                    if (taskOptional.isPresent()) {
-//                        tasks.add(taskOptional.get());
-//                    }
-//                }
-
-//                List<Student> students = new ArrayList<>();
-//                for (Student student : teacherService.getAllStudents()) {
-//                    Optional<Student> studentOptional = studentService.getStudentById(student.getId());
-//                    if (studentOptional.isPresent()) {
-//                        students.add(studentOptional.get());
-//                    }
-//                }
-
-//                List<Subject> subjects = new ArrayList<>();
-//                for (Subject subject : subjectService.getAllSubjects()) {
-//                    Optional<Subject> subjectOptional = subjectService.getSubjectById(subject.getId());
-//                    if (subjectOptional.isPresent()) {
-//                        subjects.add(subjectOptional.get());
-//                    }
-//                }
-
-//                List<Group> groups = new ArrayList<>();
-//                for (Group group : groupService.getAllGroups()) {
-//                    Optional<Group> groupOptional = groupService.getGroupById(group.getId());
-//                    if (groupOptional.isPresent()) {
-//                        groups.add(groupOptional.get());
-//                    }
-//                }
-
-//                List<PersonalTask> personalTasks = new ArrayList<>();
-//                for (PersonalTask personalTask : teacherService.getPersonalTasks(teacher1)) {
-//                    Optional<PersonalTask> personalTaskOptional = personalTaskService.getPersonalTaskById(personalTask.getId());
-//                    if (personalTaskOptional.isPresent()) {
-//                        personalTasks.add(personalTaskOptional.get());
-//                    }
-//                }
                 teacher.setStudents(teacherService.getAllStudents());
                 teacher.setPersonalTasks(teacherService.getPersonalTasks(teacher));
 
@@ -89,14 +49,13 @@ public class HomeController {
                 modelMap.addAttribute("groups",groupService.getAllGroups());
 
                 modelMap.addAttribute("teacher", teacher);
-                httpSession.setAttribute("teacher", teacher);
+                session.setAttribute("teacher", teacher);
                 return "teacher_home";
             } else {
                 return "error";
             }
 
         } else if (role.equalsIgnoreCase("student")) {
-//            Student student = Student.from(studentForm);
             Student student = studentService.checkAuthorization(Student.from(studentForm));
             if (student != null) {
                 List<PersonalTask> personalTasks = new ArrayList<>();
@@ -108,7 +67,7 @@ public class HomeController {
                 }
                 student.setPersonalTasks(personalTasks);
                 modelMap.addAttribute("student", student);
-                httpSession.setAttribute("student", student);
+                session.setAttribute("student", student);
                 return "user_home";
             } else {
                 return "error";

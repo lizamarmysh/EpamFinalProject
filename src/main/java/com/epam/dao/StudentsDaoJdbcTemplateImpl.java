@@ -32,11 +32,17 @@ public class StudentsDaoJdbcTemplateImpl implements StudentsDao {
     private final static String SQL_SELECT_BY_LOGIN = "SELECT * FROM user WHERE user_login = :login";
 
     //language=SQL
-    private final static String SQL_SELECT_BY_LOG_AND_PASS = "SELECT * FROM user where upper(user_login) like (upper(:login)) and user_password = :password";
+    private final static String SQL_SELECT_BY_LOG_AND_PASS = "SELECT * FROM user " +
+            "WHERE upper(user_login) like (upper(:login)) and user_password = :password";
 
     //language=SQL
     private final static String SQL_INSERT_INTO_USER = "INSERT INTO user(user_name, user_surname, user_group_id, user_login, user_password) " +
-                                                        " VALUES (:userName, :surname, :groupId, :login, :password)";
+            " VALUES (:userName, :surname, :groupId, :login, :password)";
+
+    //language=SQL
+    private final static String SQL_SELECT_BY_NAME_OR_SURNAME_OR_GROUP_ID = "SELECT * FROM user " +
+            "WHERE (user_name = :name) OR (user_surname = :surname) OR (user_group_id = :groupId) OR " +
+            "( (user_name = :name) AND (user_surname = :surname) AND (user_group_id = :groupId) )";
 
 
 
@@ -75,6 +81,15 @@ public class StudentsDaoJdbcTemplateImpl implements StudentsDao {
         }
         Student student = students.get(0);
         return Optional.of(student);
+    }
+
+    @Override
+    public List<Student> findStudentByNameOrSurnameOrGroupId(String name, String surnmane, Integer groupId) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("name", name);
+        params.put("surname", surnmane);
+        params.put("groupId", groupId);
+        return namedParameterJdbcTemplate.query(SQL_SELECT_BY_NAME_OR_SURNAME_OR_GROUP_ID, params, userRowMapper);
     }
 
     @Override

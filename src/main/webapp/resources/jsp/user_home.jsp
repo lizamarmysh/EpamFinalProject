@@ -18,12 +18,30 @@
 
 <body>
 <div class="form-style-home">
-    <h2>
+
+    <h2  >
         ${student.name}
         ${student.surname}
     </h2>
 
-    <form:form method="post" action="/homeStudent">
+    <c:if test="${errorReady.equalsIgnoreCase(false)}">
+        <dialog open id="successfulReady">
+            <img id="successfulReadyImg" src="/resources/pictures/OK.png">
+            <h1>The task is ready!</h1>
+            <p><input type="button" id="closeDialogReady" value="Ok"></p>
+        </dialog>
+    </c:if>
+
+
+    <form:form method="get" action="/ready" modelAttribute="PersonalTaskForm">
+        <input hidden id="hideReady" value="${isHide}"/>
+        <input hidden id="statusTask" value="${statusTask}">
+        <input hidden id="idPersonalTask" name="id" value=${personalTask.id}>
+        <input hidden name="studentId" value="${student.id}">
+        <input hidden name="taskId" value="${activeTask.id}">
+        <input hidden name="teacherId" value="${teacher.id}">
+        <input hidden name="status" value="ready">
+
         <div class="menu">
             <ul id="myUL">
                 <li><span class="caret">My tasks</span>
@@ -32,9 +50,9 @@
 
                             <ul id="readyUl" class="nested">
                                 <c:forEach items="${student.personalTasks}" var="personalTask">
-                                    <c:if test="${personalTask.status.equalsIgnoreCase('Ready')}">
-                                        <a href="/task?id=${personalTask.task.id}">
-                                            <li class="twobottomlevelTask" value="${personalTask.task.id}" >${personalTask.task.name}</li>
+                                    <c:if test="${personalTask.status.equalsIgnoreCase('ready')}">
+                                        <a href="/task?id=${personalTask.id}">
+                                            <li class="twobottomlevelTaskReady" value="${personalTask.id}" >${personalTask.task.name}</li>
                                         </a>
                                     </c:if>
                                 </c:forEach>
@@ -44,9 +62,9 @@
                         <li><span id="bottomlevel" class="caret">New tasks</span>
                             <ul id="newUl" class="nested">
                                 <c:forEach items="${student.personalTasks}" var="personalTask">
-                                    <c:if test="${personalTask.status.equalsIgnoreCase('New')}">
-                                        <a href="/task?id=${personalTask.taskId}">
-                                            <li class="twobottomlevelTask" value="${personalTask.task.name}">${personalTask.task.name}</li>
+                                    <c:if test="${personalTask.status.equalsIgnoreCase('new')}">
+                                        <a href="/task?id=${personalTask.id}">
+                                            <li class="twobottomlevelTaskNew" value="${personalTask.id}">${personalTask.task.name}</li>
                                         </a>
                                     </c:if>
                                 </c:forEach>
@@ -56,19 +74,17 @@
                 </li>
             </ul>
         </div>
-        <div class="content">
+        <div class="content" id="personalTask">
             <h3 id="taskName">${activeTask.name}</h3>
             <h4>
-                <label>Subject: ${activeTask.subject.name} </label>
-                <label id="subject"></label>
+                <label id="subject">Subject: ${activeTask.subject.name} ${activeTask.subjectId}</label>
 
-                <label>Teacher: ${teacher.name} ${teacher.surname}</label>
-                <label id="teacherName"></label>
+                <label id="teacherName">Teacher: ${teacher.name} ${teacher.surname}</label>
             </h4>
 
             <div id="task" class="textTask" align="center">${activeTask.text}</div>
 
-            <input id="sendBtn" type="submit" value="Ready">
+            <input id="readyBtn" type="submit" value="Ready">
         </div>
         <footer>
             © 2019 Elizabeth Marmysh. All rights reserved.

@@ -30,19 +30,20 @@
     </h2>
     <c:if test="${errorSend.equalsIgnoreCase(false)}">
         <dialog open id="successfulSendTask">
-            <img id="successfulSendTaskImg" src="https://avatanplus.com/files/resources/mid/5775880ee27f8155a31b7a50.png">
+            <img id="successfulSendTaskImg" src="/resources/pictures/OK.png">
             <h1>The task was successfully sent to the student!</h1>
             <p><input type="button" id="closeDialogSendTask" value="Ok"></p>
         </dialog>
     </c:if>
     <c:if test="${errorCreate.equalsIgnoreCase(false)}">
         <dialog open id="successfulCreateTask">
-            <img id="successfulCreateTaskImg" src="https://avatanplus.com/files/resources/mid/5775880ee27f8155a31b7a50.png">
+            <img id="successfulCreateTaskImg" src="/resources/pictures/OK.png">
             <h1>Task successfully created!</h1>
             <p><input type="button" id="closeDialogCreateTask" value="Ok"></p>
         </dialog>
     </c:if>
     <input hidden id="toggle" value="${isChange}"/>
+
     <div class="menu">
         <ul id="myULTask">
             <li><span class="caret">Tasks</span>
@@ -122,13 +123,13 @@
     <div class="content" id="searchTask">
         <h3>Search task</h3>
         <h4>To search, specify the following parameters:</h4>
-        <form method="post" action="/search" class="form-style-1">
-            <input id="name" type="text" placeholder="Task name">
+        <form method="get" action="/searchTask" class="form-style-1">
+            <input name="name" id="name" type="text" placeholder="Task name">
 
-            <select class="subject">
-                <option disabled selected value>Subject</option>
+            <select name="subjectId" class="subject">
+                <option selected value>All subjects</option>
                 <c:forEach items="${subjects}" var="subject">
-                    <option value="sb1">${subject.name}</option>
+                    <option value="${subject.id}">${subject.name}</option>
                 </c:forEach>
             </select>
 
@@ -147,7 +148,7 @@
                         <th>Subject</th>
                         <th>Text</th>
                     </tr>
-                    <c:forEach items="${tasks}" var="task">
+                    <c:forEach items="${tasksAfterSearch}" var="task">
                         <tr>
                             <td>${task.name}</td>
                             <td>${task.subject.name}</td>
@@ -215,14 +216,14 @@
     <div class="content" id="searchStudent">
         <h3>Search student</h3>
         <h4>To search, specify the following parameters:</h4>
-        <form method="post" action="/search" class="form-style-1">
-            <input id="name" type="text" placeholder="Student name">
-            <input id="surname" type="text" placeholder="Student surname">
+        <form method="get" action="/searchStudent" class="form-style-1">
+            <input name="name" id="name" type="text" placeholder="Student name">
+            <input name="surname" id="surname" type="text" placeholder="Student surname">
 
-            <select class="group">
-                <option disabled selected value>Group</option>
+            <select name="groupId" class="group">
+                <option selected value>All groups</option>
                 <c:forEach items="${groups}" var="group">
-                    <option><a href="#">${group.name}</a></option>
+                    <option value="${group.id}">${group.name}</option>
                 </c:forEach>
             </select>
 
@@ -233,7 +234,7 @@
     <div class="content" id="responseToStudentSearch">
         <h3>Response to student search</h3>
         <h4>The following matches were found:</h4>
-        <form method="post" action="/responseSearch" class="form-style-1">
+        <form class="form-style-1">
             <div class="responseSearch" align="center">
                 <table>
                     <tr>
@@ -241,7 +242,7 @@
                         <th>Student surname</th>
                         <th>Group</th>
                     </tr>
-                    <c:forEach items="${students}" var="student">
+                    <c:forEach items="${studentsAfterSearch}" var="student">
                         <tr>
                             <td>${student.name}</td>
                             <td>${student.surname}</td>

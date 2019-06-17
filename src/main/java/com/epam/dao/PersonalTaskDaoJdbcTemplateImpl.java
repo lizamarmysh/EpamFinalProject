@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,9 @@ public class PersonalTaskDaoJdbcTemplateImpl implements PersonalTaskDao {
     //language=SQL
     private static final String SQL_INSERT_INTO_PERSONAL_TASK = "INSERT INTO personal_task(personal_task_user_id, personal_task_task_id, personal_task_teacher_id, personal_task_status) " +
             "VALUE (:studentId, :taskId, :teacherId, :status)";
+
+    //language=SQL
+    private static final String SQL_UPDATE_PERSONAL_TASK = "UPDATE personal_task SET personal_task_status = 'ready' WHERE personal_task_id = :id";
 
     @Override
     public List<PersonalTask> findPersonalTaskByStudent(Student student) {
@@ -79,7 +83,9 @@ public class PersonalTaskDaoJdbcTemplateImpl implements PersonalTaskDao {
 
     @Override
     public void update(PersonalTask model) {
-
+        Map params = new HashMap<String, Object>();
+        params.put("id", model.getId());
+        namedParameterJdbcTemplate.update(SQL_UPDATE_PERSONAL_TASK, params);
     }
 
     @Override

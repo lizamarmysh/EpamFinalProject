@@ -11,17 +11,58 @@ $(document).ready(function () {
         }
     });
 });
+
+// Personal--Task
+$(window).on("load", function () {
+    try {
+        if (document.getElementById("statusTask").value == "new") {
+            $("#readyBtn").css('display', 'block');
+            $("#personalTask").css('display', 'block');
+        };
+    } catch (e) {
+        console.log("Exception: " + e);
+    }
+});
+
+$(window).on("load", function () {
+    try {
+        if (document.getElementById("statusTask").value == "ready") {
+            $("#readyBtn").css('display', 'none');
+            $("#personalTask").css('display', 'block');
+        };
+    } catch (e) {
+        console.log("Exception: " + e);
+    }
+});
+
+$(document).ready(function () {
+    if (document.getElementById("hideReady").value == "true") {
+        $("#personalTask").css('display', "none");
+    }
+});
+
+$(document).ready(function () {
+    $("#closeDialogReady").click(function () {
+        document.querySelector('dialog').close();
+        $("#personalTask").css("display", "block");
+    })
+});
+
 // All--Task
 $(window).on("load", function () {
-    if (document.getElementById("toggle").value == "allTask") {
-        $("#allTask").css("display", "block");
-        $("#createTask").css('display', 'none');
-        $("#searchTask").css('display', 'none');
-        $("#responseToTaskSearch").css('display', 'none');
-        $("#allStudent").css('display', 'none');
-        $("#sendTask").css('display', 'none');
-        $("#searchStudent").css('display', 'none');
-        $("#responseToStudentSearch").css('display', 'none');
+    try {
+        if (document.getElementById("toggle").value == "allTask") {
+            $("#allTask").css("display", "block");
+            $("#createTask").css('display', 'none');
+            $("#searchTask").css('display', 'none');
+            $("#responseToTaskSearch").css('display', 'none');
+            $("#allStudent").css('display', 'none');
+            $("#sendTask").css('display', 'none');
+            $("#searchStudent").css('display', 'none');
+            $("#responseToStudentSearch").css('display', 'none');
+        };
+    } catch (e) {
+        console.log("Exception: " + e);
     }
 });
 
@@ -67,17 +108,39 @@ $(document).ready(function () {
     });
 });
 
+$(window).on("load", function () {
+    try {
+        if (document.getElementById("toggle").value == "responseToTaskSearch") {
+            $("#allTask").css("display", "none");
+            $("#createTask").css('display', 'none');
+            $("#searchTask").css('display', 'none');
+            $("#responseToTaskSearch").css('display', 'block');
+            $("#allStudent").css('display', 'none');
+            $("#sendTask").css('display', 'none');
+            $("#searchStudent").css('display', 'none');
+            $("#responseToStudentSearch").css('display', 'none');
+        };
+    } catch (e) {
+        console.log("Exception: " + e);
+    }
+});
+
 // All--Student
 $(window).on("load", function () {
-    if (document.getElementById("toggle").value == "allStudent") {
-        $("#allTask").css("display", "none");
-        $("#createTask").css('display', 'none');
-        $("#searchTask").css('display', 'none');
-        $("#responseToTaskSearch").css('display', 'none');
-        $("#allStudent").css('display', 'block');
-        $("#sendTask").css('display', 'none');
-        $("#searchStudent").css('display', 'none');
-        $("#responseToStudentSearch").css('display', 'none');
+    try {
+        if (document.getElementById("toggle").value == "allStudent") {
+            $("#allTask").css("display", "none");
+            $("#createTask").css('display', 'none');
+            $("#searchTask").css('display', 'none');
+            $("#responseToTaskSearch").css('display', 'none');
+            $("#allStudent").css('display', 'block');
+            $("#sendTask").css('display', 'none');
+            $("#searchStudent").css('display', 'none');
+            $("#responseToStudentSearch").css('display', 'none');
+        }
+        ;
+    } catch (e) {
+        console.log("Exception: " + e);
     }
 });
 
@@ -109,19 +172,6 @@ $(document).ready(function () {
     })
 });
 
-// $(window).on("load",function () {
-//     if (document.getElementById("toggle").value == "sendTask") {
-//         $("#allTask").css("display", "none");
-//         $("#createTask").css('display', 'none');
-//         $("#searchTask").css('display', 'none');
-//         $("#responseToTaskSearch").css('display','none');
-//         $("#allStudent").css('display', 'none');
-//         $("#sendTask").css('display', 'block');
-//         $("#searchStudent").css('display', 'none');
-//         $("#responseToStudentSearch").css('display','none');
-//     }
-// });
-
 $(document).ready(function () {
     $("#closeDialogSendTask").click(function () {
         document.querySelector('dialog').close();
@@ -148,6 +198,23 @@ $(document).ready(function () {
         $("#searchStudent").css('display', 'block');
         $("#responseToStudentSearch").css('display', 'none');
     });
+});
+
+$(window).on("load", function () {
+    try {
+        if (document.getElementById("toggle").value == "responseToStudentSearch") {
+            $("#allTask").css("display", "none");
+            $("#createTask").css('display', 'none');
+            $("#searchTask").css('display', 'none');
+            $("#responseToTaskSearch").css('display', 'none');
+            $("#allStudent").css('display', 'none');
+            $("#sendTask").css('display', 'none');
+            $("#searchStudent").css('display', 'none');
+            $("#responseToStudentSearch").css('display', 'block');
+        };
+    } catch (e) {
+        console.log("Exception: " + e);
+    }
 });
 
 // Registration
@@ -202,3 +269,4 @@ $(document).ready(function () {
         $("#sendTaskId").val(value);
     })
 });
+

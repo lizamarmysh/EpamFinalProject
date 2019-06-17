@@ -41,4 +41,13 @@ public class PersonalTask {
                 .status(personalTaskForm.getStatus())
                 .build();
     }
+
+    public static PersonalTask fromAllParams(PersonalTaskForm personalTaskForm){
+        return PersonalTask.builder()
+                .id(personalTaskForm.getId())
+                .taskId(personalTaskForm.getTaskId())
+                .teacherId(personalTaskForm.getTeacherId())
+                .status(personalTaskForm.getStatus())
+                .build();
+    }
 }

@@ -1,6 +1,7 @@
 package com.epam.dao;
 
 import com.epam.modeles.Student;
+import com.epam.modeles.Subject;
 import com.epam.modeles.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,6 +37,14 @@ public class TaskDaoJdbcTemplateImpl implements TaskDao {
     private final static String SQL_INSERT_INTO_TASK = "INSERT INTO task(task_name, task_subject_id, task_text) " +
             "VALUE (:taskName, :subjectId, :text)";
 
+    //language=SQL
+    private final static String SQL_SELECT_BY_NAME_OR_SUBJECT = "SELECT * FROM task " +
+            "WHERE (task_name = :name) OR (task_subject_id = :subjectId) OR ( (task_name = :name) AND " +
+            "(task_subject_id = :subjectId) )";
+
+    //language=SQL
+    private final static String SQL_SELECT_BY_NAME = "SELECT * FROM task WHERE (task_name = :name)";
+
     @Override
     public Optional<Task> findTaskById(Integer id) {
         Map<String,Integer> params = new HashMap<>();
@@ -46,6 +55,16 @@ public class TaskDaoJdbcTemplateImpl implements TaskDao {
         }
         Task task = tasks.get(0);
         return Optional.of(task);
+    }
+
+    @Override
+    public List<Task> findTaskByNameOrSubject(String name, Integer subjectId) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("name",name);
+        params.put("subjectId", subjectId);
+        List<Task> tasks = namedParameterJdbcTemplate.query(SQL_SELECT_BY_NAME_OR_SUBJECT ,params,taskRowMapper);
+
+        return tasks;
     }
 
     @Override

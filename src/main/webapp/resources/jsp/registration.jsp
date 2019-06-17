@@ -17,14 +17,14 @@
 <body>
 <c:if test="${error.equalsIgnoreCase(false)}">
     <dialog open id="successfulRegistration">
-        <img id="successfulRegistrationImg" src="https://avatanplus.com/files/resources/mid/5775880ee27f8155a31b7a50.png">
+        <img id="successfulRegistrationImg" src="/resources/pictures/OK.png">
         <h1>Registration completed successfully!</h1>
         <p><input type="button" id="closeDialogRegistration" value="Ok"></p>
     </dialog>
 </c:if>
 <c:if test="${error.equalsIgnoreCase(true)}">
     <dialog open id="unsuccessfulRegistration">
-        <img id="unsuccessfulRegistrationImg" src="http://s1.iconbird.com/ico/0612/vistabasesoftwareicons/w256h2561339252558DeleteRed.png">
+        <img id="unsuccessfulRegistrationImg" src="/resources/pictures/NO.png">
         <h1>The account has not been registered!</h1>
         <p><input type="button" id="closeDialogRegistration" value="Ok"></p>
     </dialog>
@@ -41,13 +41,13 @@
 
             <input type="radio" name="role" value="student" id="student" class="register-switch-input" checked>
             <label for="student" class="register-switch-label-student">
-                <img id="iconS" src="https://image.flaticon.com/icons/png/512/68/68170.png">
+                <img id="iconS" src="/resources/pictures/student_icon.png">
                 <span>Student</span>
             </label>
 
             <input type="radio" name="role" value="teacher" id="teacher" class="register-switch-input">
             <label for="teacher" class="register-switch-label-teacher">
-                <img id="iconT" src="https://www.freeiconspng.com/uploads/teachers-icon-7.png">
+                <img id="iconT" src="/resources/pictures/teacher_icon.png">
                 <span>Teacher</span>
             </label>
         </div>

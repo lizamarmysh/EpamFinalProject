@@ -10,4 +10,5 @@ public interface StudentsDao extends CrudDao<Student> {
     Optional<Student> findStudentById(Integer id);
     Optional<Student> findStudentByLogPass(String login, String password);
     Optional<Student> findStudentByLogin(String login);
+    List<Student> findStudentByNameOrSurnameOrGroupId(String name, String surnmane, Integer groupId);
 }

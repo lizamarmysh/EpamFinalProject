@@ -22,13 +22,13 @@
 
             <input type="radio" name="role" id="student" class="register-switch-input" value="student" checked>
             <label for="student" class="register-switch-label-student">
-                <img id="iconS" src="https://image.flaticon.com/icons/png/512/68/68170.png">
+                <img id="iconS" src="resources/pictures/student_icon.png">
                 <span>Student</span>
             </label>
 
             <input type="radio" name="role" id="teacher" value="teacher" class="register-switch-input">
             <label for="teacher" class="register-switch-label-teacher">
-                <img id="iconT" src="https://www.freeiconspng.com/uploads/teachers-icon-7.png">
+                <img id="iconT" src="resources/pictures/teacher_icon.png">
                 <span>Teacher</span>
             </label>
 

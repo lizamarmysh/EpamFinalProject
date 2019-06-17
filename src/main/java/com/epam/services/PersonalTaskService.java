@@ -58,4 +58,8 @@ public class PersonalTaskService {
     public void savePersonalTask(PersonalTask personalTask){
         personalTaskDao.save(personalTask);
     }
+
+    public void updatePersonalTask(PersonalTask personalTask){
+        personalTaskDao.update(personalTask);
+    }
 }

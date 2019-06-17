@@ -7,6 +7,7 @@ import com.epam.modeles.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,9 @@ public class TaskService {
 
     public void saveTask(Task task){
         taskDao.save(task);
+    }
+
+    public List<Task> getTasksByNameOrSubject(String name, Integer subjectId){
+        return taskDao.findTaskByNameOrSubject(name, subjectId);
     }
 }

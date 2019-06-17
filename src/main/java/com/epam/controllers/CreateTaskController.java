@@ -41,39 +41,6 @@ public class CreateTaskController {
         if (session.getAttribute("teacher") != null) {
             Teacher teacher = (Teacher) session.getAttribute("teacher");
             Task task = Task.from(taskForm);
-
-//            List<Task> tasks = new ArrayList<>();
-//            for (Task task1 : teacherService.getAllTasks()) {
-//                Optional<Task> taskOptional = taskService.getTaskById(task1.getId());
-//                if (taskOptional.isPresent()) {
-//                    tasks.add(taskOptional.get());
-//                }
-//            }
-
-//            List<Group> groups = new ArrayList<>();
-//            for (Group group : groupService.getAllGroups()) {
-//                Optional<Group> groupOptional = groupService.getGroupById(group.getId());
-//                if (groupOptional.isPresent()) {
-//                    groups.add(groupOptional.get());
-//                }
-//            }
-
-//            List<Student> students = new ArrayList<>();
-//            for (Student student1 : teacherService.getAllStudents()) {
-//                Optional<Student> studentOptional = studentService.getStudentById(student1.getId());
-//                if (studentOptional.isPresent()) {
-//                    students.add(studentOptional.get());
-//                }
-//            }
-
-//            List<Subject> subjects = new ArrayList<>();
-//            for (Subject subject : subjectService.getAllSubjects()) {
-//                Optional<Subject> subjectOptional = subjectService.getSubjectById(subject.getId());
-//                if (subjectOptional.isPresent()) {
-//                    subjects.add(subjectOptional.get());
-//                }
-//            }
-
             taskService.saveTask(task);
 
             modelMap.addAttribute("groups", groupService.getAllGroups());
