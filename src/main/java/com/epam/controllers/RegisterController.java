@@ -47,7 +47,7 @@ public class RegisterController {
 
             if (studentService.saveStudent(student)){
                 modelMap.addAttribute("error","false");
-                return "registration";
+                return "login";
             } else {
                 modelMap.addAttribute("error","true");
                 return "registration";
@@ -56,20 +56,22 @@ public class RegisterController {
             Teacher teacher = Teacher.fromAllParams(registrationForm);
             modelMap.addAttribute("teacher", new Teacher());
             modelMap.addAttribute("isHide","true");
+            modelMap.addAttribute("groups", groupService.getAllGroups());
 
             if (teacherService.saveTeacher(teacher)) {
                 modelMap.addAttribute("error","false");
-                return "registration";
+                return "login";
             } else {
                 modelMap.addAttribute("error","true");
                 return "registration";
             }
         }
-        return null;
+        modelMap.addAttribute("errorRegister", "true");
+        return "error";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String show(StudentForm studentForm, ModelMap modelMap) {
+    public String show(ModelMap modelMap) {
         modelMap.addAttribute("groups", groupService.getAllGroups());
         return "registration";
     }

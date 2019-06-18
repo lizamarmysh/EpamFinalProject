@@ -15,13 +15,6 @@
 </head>
 
 <body>
-<c:if test="${error.equalsIgnoreCase(false)}">
-    <dialog open id="successfulRegistration">
-        <img id="successfulRegistrationImg" src="/resources/pictures/OK.png">
-        <h1>Registration completed successfully!</h1>
-        <p><input type="button" id="closeDialogRegistration" value="Ok"></p>
-    </dialog>
-</c:if>
 <c:if test="${error.equalsIgnoreCase(true)}">
     <dialog open id="unsuccessfulRegistration">
         <img id="unsuccessfulRegistrationImg" src="/resources/pictures/NO.png">

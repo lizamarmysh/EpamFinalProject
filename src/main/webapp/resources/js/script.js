@@ -226,6 +226,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $(".register-switch-label-student").click(function () {
+        $(".group").css("display", "block");
+        $(".specialization").css('display', 'none');
+    });
+});
+
+$(document).ready(function () {
     if (document.getElementById("hideRegistration").value == "true") {
         $(".form-style-0").css('display', "none");
     }
@@ -239,10 +246,9 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $(".register-switch-label-student").click(function () {
-        $(".group").css("display", "block");
-        $(".specialization").css('display', 'none');
-    });
+   $(".closeDialog").click(function () {
+       document.querySelector('dialog').close();
+   });
 });
 
 $(document).ready(function () {

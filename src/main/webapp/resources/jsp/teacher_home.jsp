@@ -13,20 +13,32 @@
 <html lang="en">
 
 </head>
-<meta charset="UTF-8">
-<title>
-    ${teacher.name}
-    ${teacher.surname}
-</title>
-<link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="screen"/>
+    <meta charset="UTF-8">
+    <title>
+        ${teacher.name}
+        ${teacher.surname}
+    </title>
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/resources/js/script.js"></script>
 </head>
 
 <body>
 
 <div class="form-style-home">
     <h2>
-        ${teacher.name}
-        ${teacher.surname}
+        <section class="main">
+            <div class="wrapper-demo">
+                <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+                    <span>${teacher.name} ${teacher.surname}</span>
+                    <ul class="dropdown">
+                        <li><a href="#"><i><img src="/resources/pictures/teacher_icon.png" class="icon-account icon-large"></i>${teacher.name} ${teacher.surname}</a></li>
+                        <li onclick="location.href='/exit';"><a href="/exit"><i><img src="/resources/pictures/exit.svg" class="icon-exit icon-large"></i>Exit</a></li>
+                    </ul>
+                </div>
+                ​
+            </div>
+        </section>
     </h2>
     <c:if test="${errorSend.equalsIgnoreCase(false)}">
         <dialog open id="successfulSendTask">
@@ -258,8 +270,43 @@
         © 2019 Elizabeth Marmysh. All rights reserved.
     </footer>
 </div>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" language="javascript" src="/resources/js/script.js"></script>
+<script type="text/javascript">
+    function DropDown(el) {
+        this.dd = el;
+        this.placeholder = this.dd.children('span');
+        this.opts = this.dd.find('ul.dropdown > li');
+        this.val = '';
+        this.index = -1;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents: function () {
+            var obj = this;
+            obj.dd.on('click', function (event) {
+                $(this).toggleClass('active');
+                return false;
+            });
+            obj.opts.on('click', function () {
+                var opt = $(this);
+                obj.val = opt.text();
+                obj.index = opt.index();
+                obj.placeholder.text(obj.val);
+            });
+        },
+        getValue: function () {
+            return this.val;
+        },
+        getIndex: function () {
+            return this.index;
+        }
+    };
+    $(function () {
+        var dd = new DropDown($('#dd'));
+        $(document).click(function () {
+            // all dropdowns
+            $('.wrapper-dropdown-3').removeClass('active');
+        });
+    });
+</script>
 </body>
 </html>

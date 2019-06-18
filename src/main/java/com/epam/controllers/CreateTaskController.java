@@ -28,9 +28,6 @@ public class CreateTaskController {
     private TaskService taskService;
 
     @Autowired
-    private StudentService studentService;
-
-    @Autowired
     private SubjectService subjectService;
 
     @Autowired
@@ -47,11 +44,10 @@ public class CreateTaskController {
             modelMap.addAttribute("students", teacherService.getAllStudents());
             modelMap.addAttribute("tasks", teacherService.getAllTasks());
             modelMap.addAttribute("subjects", subjectService.getAllSubjects());
-//            modelMap.addAttribute("isChange", "createTask");
             modelMap.addAttribute("errorCreate", "false");
             return "teacher_home";
-
         }
+        modelMap.addAttribute("errorCreate", "true");
         return "error";
     }
 }

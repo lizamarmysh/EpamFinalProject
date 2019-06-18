@@ -35,8 +35,8 @@ public class HomeController {
     @Autowired
     private GroupService groupService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public String getForm(@RequestParam("role") String role, StudentForm studentForm, TeacherForm teacherForm, ModelMap modelMap, HttpSession session) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String authorization(@RequestParam("role") String role, StudentForm studentForm, TeacherForm teacherForm, ModelMap modelMap, HttpSession session) {
         if (role.equalsIgnoreCase("teacher")) {
             Teacher teacher = teacherService.checkAuthorization(Teacher.from(teacherForm));
             if (teacher != null) {
@@ -52,6 +52,7 @@ public class HomeController {
                 session.setAttribute("teacher", teacher);
                 return "teacher_home";
             } else {
+                modelMap.addAttribute("errorLogin","true");
                 return "error";
             }
 
@@ -70,9 +71,16 @@ public class HomeController {
                 session.setAttribute("student", student);
                 return "user_home";
             } else {
+                modelMap.addAttribute("errorLogin","true");
                 return "error";
             }
         }
+        modelMap.addAttribute("errorLogin","true");
         return "error";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLogin(){
+        return "login";
     }
 }

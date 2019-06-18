@@ -60,10 +60,10 @@ public class SearchStudentController {
             modelMap.addAttribute("tasks",teacherService.getAllTasks());
             modelMap.addAttribute("students", teacherService.getAllStudents());
             modelMap.addAttribute("isChange", "responseToStudentSearch");
-            modelMap.addAttribute("errorSearch", "true");
 
             return "teacher_home";
         }
+        modelMap.addAttribute("errorSearch","true");
         return "error";
     }
 }

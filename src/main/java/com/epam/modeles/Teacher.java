@@ -32,6 +32,14 @@ public class Teacher {
                 .build();
     }
 
+    public Teacher(String name, String surname, String spezialization, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.spezialization = spezialization;
+        this.login = login;
+        this.password = password;
+    }
+
     public Teacher(Integer id, String name, String surname, String spezialization, String login, String password) {
         this.id = id;
         this.name = name;

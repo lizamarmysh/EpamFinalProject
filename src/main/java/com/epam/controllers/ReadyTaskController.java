@@ -27,8 +27,6 @@ public class ReadyTaskController {
     @RequestMapping(value = "/ready", method = RequestMethod.GET)
     public String getForm(@ModelAttribute("PersonalTaskForm") PersonalTaskForm personalTaskForm, ModelMap modelMap, HttpSession session) {
         if (session.getAttribute("student") != null) {
-
-
             Student student = (Student) session.getAttribute("student");
             PersonalTask personalTask = PersonalTask.fromAllParams(personalTaskForm);
             modelMap.addAttribute("student", student);
@@ -37,6 +35,7 @@ public class ReadyTaskController {
             personalTaskService.updatePersonalTask(personalTask);
             return "user_home";
         }
+        modelMap.addAttribute("errorReady","true");
         return "error";
     }
 }

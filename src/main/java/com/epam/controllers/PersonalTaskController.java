@@ -59,6 +59,7 @@ public class PersonalTaskController {
                 return "teacher_home";
             }
         }
+        modelMap.addAttribute("errorSend", "true");
         return "error";
     }
 }

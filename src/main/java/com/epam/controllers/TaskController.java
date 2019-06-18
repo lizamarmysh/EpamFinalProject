@@ -31,7 +31,7 @@ public class TaskController {
     private SubjectService subjectService;
 
     @Autowired
-    private StudentService studentService;
+    private GroupService groupService;
 
     @RequestMapping(value = "/task", method = RequestMethod.GET)
     public String getTask(@RequestParam("id") Integer id, ModelMap modelMap, HttpSession session) throws IOException {
@@ -42,6 +42,7 @@ public class TaskController {
             if (personalTaskOptional.isPresent()) {
                 Task task = personalTaskOptional.get().getTask();
                 modelMap.addAttribute("activeTask", task);
+                modelMap.addAttribute("subject", subjectService.getSubjectById(task.getSubjectId()).get());
                 modelMap.addAttribute("personalTask",personalTaskOptional.get());
                 modelMap.addAttribute("statusTask", personalTaskOptional.get().getStatus());
                 modelMap.addAttribute("student", student);
@@ -61,16 +62,17 @@ public class TaskController {
                     modelMap.addAttribute("subject", task.getSubject());
                     modelMap.addAttribute("subjects", subjectService.getAllSubjects());
                     modelMap.addAttribute("activeTask", task);
-
+                    modelMap.addAttribute("groups",groupService.getAllGroups());
                     modelMap.addAttribute("tasks", teacherService.getAllTasks());
                     modelMap.addAttribute("student", optionalPersonalTask.get().getStudent());
-                    modelMap.addAttribute("teacher", optionalPersonalTask.get().getTeacher());
+                    modelMap.addAttribute("teacher", teacher);
                     modelMap.addAttribute("students", teacherService.getAllStudents());
                     modelMap.addAttribute("isChange", "allTask");
                 }
                 return "teacher_home";
             }
         }
+        modelMap.addAttribute("errorViewTask", "true");
         return "error";
     }
 }

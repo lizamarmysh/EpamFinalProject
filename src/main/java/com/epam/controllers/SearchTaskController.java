@@ -64,11 +64,11 @@ public class SearchTaskController {
             modelMap.addAttribute("tasks",teacherService.getAllTasks());
             modelMap.addAttribute("students", teacherService.getAllStudents());
             modelMap.addAttribute("isChange", "responseToTaskSearch");
-            modelMap.addAttribute("errorSearch", "true");
 
 
             return "teacher_home";
         }
+        modelMap.addAttribute("errorSearch","true");
         return "error";
     }
 }

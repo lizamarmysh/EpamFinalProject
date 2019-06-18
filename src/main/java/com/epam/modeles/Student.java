@@ -50,7 +50,7 @@ public class Student {
         this.password = password;
     }
 
-    public Student(Integer id, String name, String surname, int groupId, String login, String password) {
+    public Student(Integer id, String name, String surname, Integer groupId, String login, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;

@@ -41,8 +41,13 @@ public class StudentsDaoJdbcTemplateImpl implements StudentsDao {
 
     //language=SQL
     private final static String SQL_SELECT_BY_NAME_OR_SURNAME_OR_GROUP_ID = "SELECT * FROM user " +
-            "WHERE (user_name = :name) OR (user_surname = :surname) OR (user_group_id = :groupId) OR " +
-            "( (user_name = :name) AND (user_surname = :surname) AND (user_group_id = :groupId) )";
+            "WHERE (user_name = :name) " +
+            "OR (user_surname = :surname) " +
+            "OR (user_group_id = :groupId) " +
+            "OR ( (user_name = :name) AND (user_surname = :surname) ) " +
+            "OR ( (user_name = :name) AND (user_group_id = :groupId) ) " +
+            "OR ( (user_surname = :surname) AND (user_group_id = :groupId) ) " +
+            "OR ( (user_name = :name) AND (user_surname = :surname) AND (user_group_id = :groupId))";
 
 
 

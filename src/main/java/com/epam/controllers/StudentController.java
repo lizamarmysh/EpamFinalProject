@@ -62,6 +62,7 @@ public class StudentController {
                 return "teacher_home";
             }
         }
+        modelMap.addAttribute("errorViewStudent", "true");
         return "error";
     }
 }
