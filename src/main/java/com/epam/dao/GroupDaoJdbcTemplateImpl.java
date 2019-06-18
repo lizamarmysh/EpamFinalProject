@@ -17,10 +17,8 @@ import java.util.Optional;
 public class GroupDaoJdbcTemplateImpl implements GroupDao{
 
     @Autowired
-    private JdbcTemplate template;
-
-    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     private Map<Long, Group> groupMap = new HashMap<>();
 
     @Autowired
@@ -66,6 +64,6 @@ public class GroupDaoJdbcTemplateImpl implements GroupDao{
 
     @Override
     public List<Group> findAll() {
-        return template.query(SQL_SELECT_ALL_GROUPS,groupRowMapper);
+        return namedParameterJdbcTemplate.query(SQL_SELECT_ALL_GROUPS,groupRowMapper);
     }
 }
